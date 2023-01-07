@@ -1,15 +1,15 @@
 import { getConfiguration } from '../../config';
 import getStyle from './style';
 import { styled } from '@stitches/react';
-import type * as CSSUtil from '@stitches/react/types/css-util';
-import { createContext, forwardRef, ReactNode } from 'react';
+import { createContext, forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 export type Align = 'normal' | 'start' | 'center' | 'end' | 'stretch';
 export type Justify = 'start' | 'center' | 'end' | 'between' | 'around' | 'initial' | 'inherit';
 export type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse';
 export type Wrap = 'nowrap' | 'wrap' | 'reverse';
 type StyleableComponent = keyof JSX.IntrinsicElements | React.ComponentType<any>;
-export type RowProps = {
+
+export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Content of the element
    */
@@ -39,10 +39,6 @@ export type RowProps = {
    */
   gutterWidth?: number;
   /**
-   * Optional styling
-   */
-  style?: CSSUtil.CSS;
-  /**
    * Set to apply some debug styling
    */
   debug?: boolean;
@@ -50,7 +46,7 @@ export type RowProps = {
    * Use your own component
    */
   component?: StyleableComponent;
-};
+}
 
 export const GutterWidthContext = createContext<number | undefined>(undefined);
 
@@ -70,9 +66,24 @@ const Row = forwardRef<HTMLElement, RowProps>((props, ref) => {
     },
   );
 
+  const {
+    children,
+    align,
+    justify,
+    direction,
+    wrap,
+    nogutter,
+    gutterWidth,
+    debug,
+    component,
+    ...rest
+  } = props;
+  
   return (
-    <StyledComponent ref={ref}>
-      <GutterWidthContext.Provider value={theGutterWidth}>{props.children}</GutterWidthContext.Provider>
+    <StyledComponent ref={ref} {...rest}>
+      <GutterWidthContext.Provider value={theGutterWidth}>
+        {props.children}
+      </GutterWidthContext.Provider>
     </StyledComponent>
   );
 });
@@ -84,7 +95,6 @@ Row.defaultProps = {
   wrap: 'wrap',
   nogutter: false,
   gutterWidth: undefined,
-  style: {},
   debug: false,
   component: 'div',
 };

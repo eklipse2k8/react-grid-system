@@ -1,11 +1,10 @@
-import type * as CSSUtil from '@stitches/react/types/css-util';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 export type Align = 'normal' | 'start' | 'center' | 'end' | 'stretch';
 export type Justify = 'start' | 'center' | 'end' | 'between' | 'around' | 'initial' | 'inherit';
 export type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse';
 export type Wrap = 'nowrap' | 'wrap' | 'reverse';
 type StyleableComponent = keyof JSX.IntrinsicElements | React.ComponentType<any>;
-export type RowProps = {
+export interface RowProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Content of the element
      */
@@ -35,10 +34,6 @@ export type RowProps = {
      */
     gutterWidth?: number;
     /**
-     * Optional styling
-     */
-    style?: CSSUtil.CSS;
-    /**
      * Set to apply some debug styling
      */
     debug?: boolean;
@@ -46,7 +41,7 @@ export type RowProps = {
      * Use your own component
      */
     component?: StyleableComponent;
-};
+}
 export declare const GutterWidthContext: import("react").Context<number | undefined>;
 declare const Row: import("react").ForwardRefExoticComponent<RowProps & import("react").RefAttributes<HTMLElement>>;
 export default Row;
