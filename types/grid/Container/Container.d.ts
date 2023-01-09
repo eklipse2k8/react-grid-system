@@ -1,7 +1,5 @@
-import { StyleableComponent } from '../../CoreTypes';
-import type * as CSSUtil from '@stitches/react/types/css-util';
-import { ReactNode } from 'react';
-export interface ContainerProps {
+import { HTMLAttributes, ReactNode } from 'react';
+export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Content of the component
      */
@@ -9,50 +7,42 @@ export interface ContainerProps {
     /**
      * True makes the container full-width, false fixed-width
      */
-    fluid: boolean;
+    fluid?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in xs, not present means fluid everywhere
      */
-    xs: boolean;
+    xs?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in sm, not present means fluid everywhere
      */
-    sm: boolean;
+    sm?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in md, not present means fluid everywhere
      */
-    md: boolean;
+    md?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in lg, not present means fluid everywhere
      */
-    lg: boolean;
+    lg?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in xl, not present means fluid everywhere
      */
-    xl: boolean;
+    xl?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in xxl, not present means fluid everywhere
      */
-    xxl: boolean;
+    xxl?: boolean;
     /**
      * This is in combination with fluid enabled
      * True makes container fluid only in xxxl, not present means fluid everywhere
      */
-    xxxl: boolean;
-    /**
-     * Optional styling
-     */
-    style?: CSSUtil.CSS;
-    /**
-     * Use your own component
-     */
-    component?: StyleableComponent;
+    xxxl?: boolean;
 }
-declare const Container: import("react").ForwardRefExoticComponent<ContainerProps & import("react").RefAttributes<HTMLElement>>;
+declare const Container: import("react").ForwardRefExoticComponent<ContainerProps & import("react").RefAttributes<HTMLDivElement>>;
 export default Container;

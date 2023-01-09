@@ -13,6 +13,6 @@ export function getConfiguration(): Configuration {
   return configuration;
 }
 
-export function setConfiguration(newConfiguration: Configuration) {
+export function setConfiguration(newConfiguration: Partial<Configuration>) {
   configuration = { ...configuration, ...newConfiguration };
 }
