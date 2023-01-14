@@ -9,14 +9,17 @@
     },
     "transform": {
       "react": {
+        "throwIfNamespace": true,
+        "development": true,
         "refresh": true,
-        "runtime": "automatic"
+        "runtime": "automatic",
+        "useBuiltins": true
       }
     },
     "target": "es2016",
-    "loose": false,
-    "externalHelpers": false,
-    "keepClassNames": false
+    "loose": true,
+    "externalHelpers": true,
+    "keepClassNames": true
   },
   "minify": false,
   "sourceMaps": true,
