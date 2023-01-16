@@ -10,8 +10,8 @@
     "transform": {
       "react": {
         "throwIfNamespace": true,
-        "development": true,
-        "refresh": true,
+        "development": false,
+        "refresh": false,
         "runtime": "automatic",
         "useBuiltins": true
       }
