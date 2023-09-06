@@ -18,10 +18,10 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "outDir": "build"

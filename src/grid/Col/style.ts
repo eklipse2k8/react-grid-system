@@ -1,13 +1,15 @@
-import { ScreenClass } from '../../CoreTypes';
-import { screenClasses } from '../../utils';
-import { ColProps } from './Col';
-import type * as CSSUtil from '@stitches/react/types/css-util';
+import { ScreenClass } from "../../CoreTypes";
+import { screenClasses } from "../../utils";
+import { ColProps } from "./Col";
+import type * as CSSUtil from "@stitches/react/types/css-util";
 
 export type ColumnWidth = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'content';
 export type ColumnClasses<T> = Partial<Record<ScreenClass, T>>;
 
-function hasWidth(widths: {}): boolean {
-  return Object.keys(widths).reduce((acc, cur) => acc || widths[cur], false);
+function hasWidth(widths: ColumnClasses<number | string>): boolean {
+  return (Object.keys(widths) as ScreenClass[]).some((key) =>
+    Boolean(widths[key])
+  );
 }
 
 function getWidth(width?: number, gridColumns?: number): string | undefined {
@@ -40,10 +42,10 @@ export function createColStyle({
   gridColumns,
 }: ColumnStyleConfig): CSSUtil.CSS {
   const styles: CSSUtil.CSS = {
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     minHeight: 1,
-    position: 'relative',
-    width: '100%',
+    position: "relative",
+    width: "100%",
   };
 
   if (gutterWidth !== undefined) {
@@ -52,31 +54,32 @@ export function createColStyle({
   }
 
   if (debug) {
-    styles.outline = '1px solid silver';
-    styles.background = 'rgba(0,0,0,.05)';
-    styles.lineHeight = '32px';
+    styles.outline = "1px solid silver";
+    styles.background = "rgba(0,0,0,.05)";
+    styles.lineHeight = "32px";
   }
 
-  styles.flexBasis = '100%';
+  styles.flexBasis = "100%";
   styles.flexGrow = 0;
   styles.flexShrink = 0;
-  styles.maxWidth = '100%';
-  styles.marginLeft = '0%';
-  styles.right = 'auto';
-  styles.left = 'auto';
+  styles.maxWidth = "100%";
+  styles.marginLeft = "0%";
+  styles.right = "auto";
+  styles.left = "auto";
 
   screenClasses.forEach((size, index) => {
     if (screenClasses.indexOf(screenClass) >= index) {
       const theWidth = width[size];
-      if (typeof theWidth === 'number') {
+      if (typeof theWidth === "number") {
         const currentWidth = getWidth(theWidth, gridColumns);
         styles.flexBasis = currentWidth || styles.flexBasis;
         styles.maxWidth = currentWidth;
-      } else if (theWidth === 'content') {
-        styles.flexBasis = 'auto';
+      } else if (theWidth === "content") {
+        styles.flexBasis = "auto";
       }
       styles.width = styles.flexBasis;
-      styles.marginLeft = getWidth(offset[size], gridColumns) || styles.marginLeft;
+      styles.marginLeft =
+        getWidth(offset[size], gridColumns) || styles.marginLeft;
       styles.right = getWidth(pull[size], gridColumns) || styles.right;
       styles.left = getWidth(push[size], gridColumns) || styles.left;
       if (order[size]) {
@@ -91,9 +94,9 @@ export function createColStyle({
   }
 
   if (forceWidth) {
-    styles.flexBasis = 'unset';
-    styles.flexGrow = 'unset';
-    styles.flexShrink = 'unset';
+    styles.flexBasis = "unset";
+    styles.flexGrow = "unset";
+    styles.flexShrink = "unset";
     styles.width = forceWidth;
   }
 
